@@ -16,3 +16,8 @@ SELECT c.categories_name AS `Категория`, sub.cnt AS `Количеств
 ) AS sub 
   ON c.id_categories = sub.id_categories 
     ORDER BY categories_name; 
+
+### Создание представления vw_goods_categories, включающие в себя только необходимые ключевые поля и названия сущностей
+CREATE VIEW vw_goods_categories AS 
+  SELECT c.id_categories, c.categories_name, c.categories_description, c.num 
+    FROM goods_categories AS c;
