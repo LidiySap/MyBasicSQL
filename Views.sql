@@ -21,3 +21,14 @@ SELECT c.categories_name AS `Категория`, sub.cnt AS `Количеств
 CREATE VIEW vw_goods_categories AS 
   SELECT c.id_categories, c.categories_name, c.categories_description, c.num 
     FROM goods_categories AS c;
+
+#### Создание SQL запроса, вычисляющего количество товаров в каждой категории, используя внутреннее и внешнее объединения
+SELECT c.categories_name AS `Категория`, sub.cnt AS `Количество товаров` 
+  FROM vw_goods_categories AS c 
+    INNER JOIN 
+(SELECT id_categories, COUNT(goods) AS cnt 
+   FROM vw_goods 
+     GROUP BY id_categories 
+) AS sub 
+  ON c.id_categories = sub.id_categories 
+    ORDER BY sub.cnt; 
